@@ -1,0 +1,83 @@
+{% extends "main.html" %}
+{% load static %}
+{% block navbar %}
+<!--Navbar-->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" href="{% url 'home:index' %}">{{ settings.APP_NAME }}</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+    {% comment %}   {% url 'secrets:secrets' as secret_url %}
+      <li class ="nav-item">
+          <a class="nav-link {% if request.get_full_path == secret_url %} active {% endif%}" {% if request.get_full_path == secret_url %} aria-current="page"  {% endif %} href="{% url 'secrets:secrets' %}">Secrets</a></li>
+      </li> {% endcomment %}
+      {% endif %}
+      {% if user.is_authenticated %}
+      {% url 'users:users' as users_url %}
+      <li class ="nav-item">
+          <a class="nav-link {% if request.get_full_path == users_url %} active {% endif%}" {% if request.get_full_path == users_url %} aria-current="page"  {% endif %} href="{% url 'users:users' %}">Users</a></li>
+      </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+  
+      {% endif %}
+
+    </ul>
+    
+
+    <div class="navbar-collapse justify-content-end " id="navbarNavDarkDropdown">
+      {% if user.is_authenticated and user.tenant != None %}
+        <ul class="navbar-nav">
+            
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tenants
+            </a>
+            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+              {% for tenant in user.tenant.all %}
+              <li class ="nav-item">
+                <a class="dropdown-item" href="{% url 'tenant:tenant_redirect' tenant.id %}">{{tenant.name}}</a>
+              </li>
+              {% endfor %}
+            
+            </ul>
+          </li>
+    
+        </ul>
+      {% endif %}
+      <ul class="navbar-nav">
+        {% if  user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Account
+            </a>
+            <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+             {% comment %}  <li class ="nav-item">
+                <a class="dropdown-item" href="{% url 'users:view_profile' user.id %}">Settings</a>
+              </li> {% endcomment %}
+              <li class ="nav-item">
+                <a class="dropdown-item" href="{% url 'logout' %}?next={% url 'home:index' %}">Logout</a>
+              </li>
+            
+            </ul>
+          </li>
+        {% else %}
+          <li class ="nav-item">
+            <a class="nav-link" href="{% url 'household:household_create' %}">Register Household</a>
+          </li>
+          <li class ="nav-item">
+            <a class="nav-link" href="{% url 'login' %}?next={% url 'home:index' %}">Login</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+ 
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="justify-content-center mt-5">
+        
+        <div class="card shadow-sm login-card col-lg-6 col-md-6 col-sm-6 mx-auto" >
+            <div class="card-header">
+                {% if page == 'edit' %}Edit{% endif %} User
+            </div>
+            <div class="card-body  ">
+                <form  method="POST" action="{% url 'users:user_edit' edit_user.id %}">
+                    {% csrf_token %}
+                    
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="name">First Name</name>
+                        <input type="text" id="name" name="name" class="form-control" value="{{edit_user.first_name}}" {% if page == 'view' %} disabled {% else %} autofocus {% endif %}/>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="name">Last Name</name>
+                        <input type="text" id="last_name" name="last_name" class="form-control" value="{{edit_user.last_name}}" {% if page == 'view' %} disabled  {% endif %}/>
+                    </div>
+                
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="username">Username</name>
+                        <input type="text" id="username" name="username" class="form-control" value="{{edit_user.username}}" disabled/>
+                    </div>
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="email">Email</name>
+                        <input type="text" id="email" name="email" class="form-control" value="{{edit_user.email}}" disabled/>
+                    </div>
+                    <div class="form-outline mb-4 form-check">
+                        <input class="form-check-input" type="checkbox" value="admin" name="is_admin" id="is_admin" {% if edit_user.is_staff %} checked {% endif %} {% if page == 'view' %} disabled {% endif %}>
+                        <label class="form-check-label" for="is_admin">
+                          Admin
+                        </label>
+                    </div>
+                    <div class="form-outline mb-4 form-check">
+                        <input class="form-check-input" type="checkbox" value="active" name="is_active" id="is_active" {% if edit_user.is_active %} checked {% endif %} {% if page == 'view' %} disabled {% endif %}>
+                        <label class="form-check-label" for="is_active">
+                          Active
+                        </label>
+                    </div>
+                    <div class="form-outline mb-4 form-check">
+                        <input class="form-check-input" type="checkbox" value="locked" name="is_locked" id="is_locked" {% if edit_user.is_locked %} checked {% endif %} {% if page == 'view' %} disabled {% endif %}>
+                        <label class="form-check-label" for="is_locked">
+                          Locked
+                        </label>
+                    </div>
+
+                    <!-- Submit button -->
+                    {% if page == 'edit' %}
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+                    <a href="{% url next %}" class="btn btn-danger btn-block mb-4">Cancel</a>
+                    {% else %}
+                    <div class="edit-user-action">
+                        <a href="{% url 'users:user_edit' edit_user.id %}" class="btn btn-success btn-block mb-4">Edit User</a> <a href="{% url 'users:user_reset_password' edit_user.id %}" class="btn btn-danger btn-block mb-4">Reset Password</a> <a href="{% url next %}" class="btn btn-primary btn-block mb-4">Go Back</a>
+                    </div>
+                    {% endif %}
+                    
+                    
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

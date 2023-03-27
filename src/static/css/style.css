@@ -1,0 +1,38 @@
+body {
+    background-color: whitesmoke;
+
+}
+
+.main-page-image {
+    max-width: 10%;
+    height: auto;
+}
+
+.login-card  {
+     padding: auto; 
+    /* width: 50%; */
+
+}
+
+.actions-buttons-right  {
+    /* padding-bottom: 10px; */
+    width: auto !important;
+}
+
+.action-buttons a {
+    margin-left: 10px;
+     
+ }
+ .action-buttons span {
+    margin-left: 10px;
+     
+ }
+
+ .list-group-item {
+     margin-top: 5px;
+ }
+
+ textarea  {
+     width: 100%;
+ }
+

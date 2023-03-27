@@ -1,0 +1,40 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="justify-content-center mt-5">
+        
+        <div class="card shadow-sm login-card col-lg-6 col-md-6 col-sm-6 mx-auto" >
+            <div class="card-header">
+               Invite User
+            </div>
+            <div class="card-body  ">
+                <form  method="POST" action="{% url 'users:user_invite' %}">
+                    {% csrf_token %}
+                    
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="name">Name</name>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name..." autofocus required/>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="last_name">Last Name</name>
+                        <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Enter Last Name..." required/>
+                    </div>
+                
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="email">Email</name>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Enter Email..." required/>
+                    </div>
+
+                    <!-- Submit button -->
+                    
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Invite</button>
+                    <a href="{% url next %}" class="btn btn-danger btn-block mb-4">Cancel</a>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

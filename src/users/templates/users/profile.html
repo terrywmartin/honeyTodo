@@ -1,0 +1,25 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="justify-content-center mt-5">
+            <div class="col">
+               
+                <div class="row">
+                    
+                    <div class="col-lg-8 col-md-8 col-sm-8 mx-auto" >
+                        <div class="col">
+                            <h3>Settings</h3>
+                            <hr>
+                            
+                            <div class="row" id="user-settings">
+                                <div id="information" ></div>
+                                {% include 'users/partials/settings.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

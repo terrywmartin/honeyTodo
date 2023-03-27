@@ -1,0 +1,34 @@
+{% extends "navbar.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="justify-content-center mt-5">
+        
+        <div class="card shadow-sm login-card col-lg-6 col-md-6 col-sm-6 mx-auto" >
+            <div class="card-header">
+                Create User
+            </div>
+            <div class="card-body  ">
+                <form  method="POST" action="{% url 'household:household_create'  %}">
+                    {% csrf_token %}
+                    
+                    <div class="form-outline mb-4">
+                        <name class="form-label" for="name">Name</name>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Name of the household..." required autofocus/>
+                    </div>
+
+                    
+                    <!-- Submit button -->
+                    
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Create</button>
+                    <a href="{% url next %}" class="btn btn-danger btn-block mb-4">Cancel</a>
+                    
+                    
+                    
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

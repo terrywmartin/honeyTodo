@@ -1,7 +1,7 @@
 Django<4.2
 argon2-cffi
 argon2-cffi-bindings
-django-dotenv
+django-environ
 wheel
 Pillow
 psycopg2
